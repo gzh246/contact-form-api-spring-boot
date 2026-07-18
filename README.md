@@ -11,9 +11,8 @@ work.
 
 > The public instance is an independently hosted portfolio service and may be
 > briefly unavailable during maintenance. Submit synthetic data only. The
-> current live instance was deployed from the previous verified Spring Boot
-> 3.3.x build; this repository is verified on 3.5.16 but has not yet been
-> redeployed, so the demo is not yet commit-identical to the staged release.
+> current live instance runs the Spring Boot 3.5.16 release JAR built from this
+> repository.
 
 ![Live contact API demo](docs/assets/contact-api-live.png)
 
