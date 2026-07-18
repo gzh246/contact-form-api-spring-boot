@@ -1,0 +1,56 @@
+name: Project inquiry
+description: Request a scoped API, integration, or deployment implementation
+title: "[Project inquiry] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue is public. Describe the outcome and boundaries only. Do not
+        include credentials, access tokens, private URLs, customer data, or
+        confidential implementation details.
+
+  - type: dropdown
+    id: work_type
+    attributes:
+      label: Work type
+      options:
+        - New Spring Boot REST API
+        - Existing API review or repair
+        - Email, webhook, or third-party integration
+        - Docker or deployment review
+        - Other fixed-scope Java work
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: What should be working when the project is complete?
+      placeholder: A contact endpoint that validates, stores, and forwards submissions.
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and acceptance criteria
+      description: List systems involved, required behavior, and how completion will be verified.
+    validations:
+      required: true
+
+  - type: input
+    id: target_date
+    attributes:
+      label: Target date
+      description: Optional. Use a date and timezone rather than "as soon as possible".
+
+  - type: checkboxes
+    id: public_data_confirmation
+    attributes:
+      label: Public-data confirmation
+      options:
+        - label: I confirm that this issue contains no credentials, private data, or confidential details.
+          required: true
+        - label: If this inquiry originated on a freelance marketplace, I will continue communication and contracting through that marketplace.
+          required: true

@@ -1,0 +1,50 @@
+{
+  "info": {
+    "_postman_id": "f44ac731-74ad-4379-84d2-bc7b77963bd7",
+    "name": "Contact Form REST API Demo",
+    "description": "Requests for the Java/Spring Boot contact form API reference implementation.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "Submit valid contact form",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Demo User\",\n  \"email\": \"demo@example.com\",\n  \"phone\": \"+86 138 0000 0000\",\n  \"message\": \"I would like to discuss a small Spring Boot project.\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/contacts"
+      }
+    },
+    {
+      "name": "Submit invalid contact form",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"\",\n  \"email\": \"not-an-email\",\n  \"phone\": \"12\",\n  \"message\": \"\"\n}"
+        },
+        "url": "{{baseUrl}}/api/v1/contacts"
+      }
+    }
+  ]
+}

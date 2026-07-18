@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A live Java and Spring Boot contact form REST API portfolio demo.">
+    <title>Spring Contact API Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="page-shell">
+    <section class="intro" aria-labelledby="page-title">
+        <div>
+            <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Live Java / Spring Boot demo</p>
+            <h1 id="page-title">A contact API,<br><span>end to end.</span></h1>
+            <p class="lede">
+                This self-initiated demo shows request validation, structured errors,
+                database persistence, and a real fixed-recipient email notification.
+            </p>
+        </div>
+
+        <dl class="feature-grid" aria-label="Implementation highlights">
+            <div>
+                <dt>API</dt>
+                <dd>Spring Boot 3</dd>
+            </div>
+            <div>
+                <dt>Data</dt>
+                <dd>JPA + Flyway</dd>
+            </div>
+            <div>
+                <dt>Mail</dt>
+                <dd>Authenticated SMTP</dd>
+            </div>
+            <div>
+                <dt>Ops</dt>
+                <dd>HTTPS + Nginx</dd>
+            </div>
+        </dl>
+
+        <div class="evidence-links" aria-label="Technical evidence">
+            <a href="swagger-ui/index.html">Explore Swagger UI <span aria-hidden="true">&nearr;</span></a>
+            <a href="actuator/health">View health check <span aria-hidden="true">&nearr;</span></a>
+        </div>
+    </section>
+
+    <section class="form-card" aria-labelledby="form-title">
+        <div class="card-heading">
+            <div>
+                <p class="step-label">Interactive request</p>
+                <h2 id="form-title">Test the contact endpoint</h2>
+            </div>
+            <button class="sample-button" id="sample-button" type="button">Use sample data</button>
+        </div>
+
+        <p class="privacy-note">
+            Use synthetic data only. Do not submit private, confidential, or client information.
+        </p>
+
+        <form id="contact-form" autocomplete="off" novalidate>
+            <div class="field-row">
+                <div class="field">
+                    <label for="name">Sample name <span aria-hidden="true">*</span></label>
+                    <input id="name" name="name" type="text" maxlength="100" autocomplete="off"
+                           placeholder="Alex Morgan" aria-describedby="name-error" required>
+                    <p class="field-error" id="name-error"></p>
+                </div>
+                <div class="field">
+                    <label for="phone">Sample phone <span class="optional">Optional</span></label>
+                    <input id="phone" name="phone" type="tel" maxlength="30" autocomplete="off"
+                           placeholder="+1 415 555 0136" aria-describedby="phone-error">
+                    <p class="field-error" id="phone-error"></p>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="email">Sample email <span aria-hidden="true">*</span></label>
+                <input id="email" name="email" type="email" maxlength="254" autocomplete="off"
+                       placeholder="alex@example.com" aria-describedby="email-hint email-error" required>
+                <p class="field-hint" id="email-hint">Used as Reply-To; it never controls the notification recipient.</p>
+                <p class="field-error" id="email-error"></p>
+            </div>
+
+            <div class="field">
+                <div class="label-line">
+                    <label for="message">Message <span aria-hidden="true">*</span></label>
+                    <span id="message-count">0 / 2000</span>
+                </div>
+                <textarea id="message" name="message" rows="5" maxlength="2000"
+                          placeholder="Tell us briefly what you would like to build."
+                          aria-describedby="message-error" required></textarea>
+                <p class="field-error" id="message-error"></p>
+            </div>
+
+            <div class="form-footer">
+                <button class="submit-button" id="submit-button" type="submit">
+                    <span class="button-label">Submit demo request</span>
+                    <span class="button-arrow" aria-hidden="true">&rarr;</span>
+                </button>
+                <p class="endpoint-label"><code>POST /api/v1/contacts</code></p>
+            </div>
+
+            <div class="form-status" id="form-status" role="status" aria-live="polite" hidden></div>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <p>Self-initiated portfolio demo &middot; Synthetic data &middot; No claimed client work</p>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+.git
+.github
+.idea
+.vscode
+target
+data
+.env
+.env.*
+!.env.example
+*.local.env
+!*.local.env.example
+*.iml
+*.mv.db
+*.trace.db
+*PROPOSAL.md
+*VERIFICATION.md

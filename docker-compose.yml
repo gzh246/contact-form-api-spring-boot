@@ -1,0 +1,45 @@
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-contact_demo}
+      MYSQL_USER: ${MYSQL_USER:-contact_app}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-contact_demo_local_password}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-contact_demo_local_root_password}
+    volumes:
+      - contact_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${MYSQL_ROOT_PASSWORD:-contact_demo_local_root_password}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  mailpit:
+    image: axllent/mailpit:v1.20
+    ports:
+      - "127.0.0.1:8025:8025"
+
+  api:
+    build: .
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-contact_demo}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_USER:-contact_app}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD:-contact_demo_local_password}
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SERVER_ADDRESS: 0.0.0.0
+      APP_CORS_ALLOWED_ORIGINS: ${APP_CORS_ALLOWED_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
+      APP_MAIL_ENABLED: ${APP_MAIL_ENABLED:-true}
+      SMTP_HOST: ${SMTP_HOST:-mailpit}
+      SMTP_PORT: ${SMTP_PORT:-1025}
+      SMTP_AUTH: ${SMTP_AUTH:-false}
+      SMTP_STARTTLS: ${SMTP_STARTTLS:-false}
+      CONTACT_MAIL_FROM: ${CONTACT_MAIL_FROM:-no-reply@example.com}
+      CONTACT_MAIL_TO: ${CONTACT_MAIL_TO:-owner@example.com}
+    ports:
+      - "127.0.0.1:8080:8080"
+
+volumes:
+  contact_mysql_data:

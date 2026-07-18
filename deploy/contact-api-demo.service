@@ -1,0 +1,25 @@
+[Unit]
+Description=Contact Form REST API Portfolio Demo
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=contactdemo
+Group=contactdemo
+WorkingDirectory=/opt/contact-api-demo/current
+EnvironmentFile=/etc/contact-api-demo/contact-api-demo.env
+ExecStart=/usr/bin/java -Xms64m -Xmx256m -jar /opt/contact-api-demo/current/contact-api-demo.jar
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=20s
+SuccessExitStatus=143
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadOnlyPaths=/opt/contact-api-demo
+ReadWritePaths=/var/lib/contact-api-demo
+
+[Install]
+WantedBy=multi-user.target
